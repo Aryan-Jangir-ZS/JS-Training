@@ -109,7 +109,7 @@ fetchApi().then(result => console.log(result))
 
 var raceVariable = 0;
 
-const promiseRace = () => {
+const promiseRace = async () => {
 
 
     const function1 =  fetch("https://jsonplaceholder.typicode.com/todos/1").then((res) => {
@@ -119,10 +119,15 @@ const promiseRace = () => {
         raceVariable = 4;
     })
 
-    promise1.race([function1,function2]).then(res => {
-        
-    })
 
+    await Promise.race([function1,function2]);
 
-
+    return raceVariable;
 }
+
+promiseRace().then((res)=>{console.log(raceVariable)
+}) 
+
+
+
+
