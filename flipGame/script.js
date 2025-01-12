@@ -71,6 +71,7 @@ function checkMatch() {
     } else {
         misses++;
         missesSpan.textContent = misses;
+        
         setTimeout(() => {
             firstCard.card.classList.remove('flipped');
             secondCard.card.classList.remove('flipped');
