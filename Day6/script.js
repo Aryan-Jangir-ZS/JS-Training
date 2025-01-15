@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userForm = document.getElementById('userForm');
+    const userDetails = document.getElementById('userDetails');
     const greeting = document.getElementById('greeting');
     const setThemeBtn = document.getElementById('setThemeBtn');
-
+    const saveGreetingBtn = document.getElementById('saveGreetingBtn');
+    const sessionGreetingInput = document.getElementById('sessionGreeting');
 
     const storedName = localStorage.getItem('name');
     const storedEmail = localStorage.getItem('email');
     if (storedName && storedEmail) {
-        greeting.innerText = `Hello, ${storedName}! Your email is ${storedEmail}.`;
+        userDetails.innerHTML = `<p>Name: ${storedName}</p><p>Email: ${storedEmail}</p>`;
     }
 
 
@@ -19,15 +21,26 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('name', name);
         localStorage.setItem('email', email);
 
-        greeting.innerText = `Hello, ${name}! Your email is ${email}.`;
+        userDetails.innerHTML = `<p>Name: ${name}</p><p>Email: ${email}</p>`;
+        greeting.innerText = `Hello, ${name}! Welcome back!`;
     });
 
 
     const sessionGreeting = sessionStorage.getItem('greeting');
-    if (!sessionGreeting) {
-        sessionStorage.setItem('greeting', 'Welcome back!');
+    if (sessionGreeting) {
+        greeting.innerText = sessionGreeting; 
+    } else {
+        sessionStorage.setItem('greeting', 'Welcome back!'); 
+        greeting.innerText = 'Welcome back!'; 
     }
-    console.log(sessionStorage.getItem('greeting')); 
+
+    saveGreetingBtn.addEventListener('click', () => {
+        const customGreeting = sessionGreetingInput.value.trim();
+        if (customGreeting) {
+            sessionStorage.setItem('greeting', customGreeting);
+            greeting.innerText = customGreeting;
+        }
+    });
 
     const theme = getCookie('theme');
     applyTheme(theme);
@@ -54,14 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return null;
     }
-
     function applyTheme(theme) {
+        const body = document.body;
         if (theme === 'dark') {
-            document.body.classList.add('dark-theme');
-            document.body.classList.remove('light-theme');
+            body.classList.add('dark-theme');
+            body.classList.remove('light-theme');
         } else {
-            document.body.classList.add('light-theme');
-            document.body.classList.remove('dark-theme');
+            body.classList.add('light-theme');
+            body.classList.remove('dark-theme');
         }
     }
 });

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Storage Example</title>
+    <title>Storage Assignment</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,9 +17,13 @@
             <button type="submit">Submit</button>
         </form>
         
-        <div id="greeting"></div>
-        
-        <button id="setThemeBtn">Set Theme</button>
+        <div id="userDetails"></div> 
+        <div id="greeting"></div> 
+        <label for="sessionGreeting">Custom Session Greeting:</label>
+        <input type="text" id="sessionGreeting" placeholder="Greeting Message" />
+        <button id="saveGreetingBtn">Save Greeting</button>
+
+        <button id="setThemeBtn">Toggle Theme</button>
     </div>
     
     <script src="script.js"></script>
